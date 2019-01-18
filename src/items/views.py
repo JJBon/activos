@@ -31,6 +31,10 @@ class ActivoListView(ListView):
         print(request.GET)
         
         if request.method == 'GET':
+            print("Checking request")
+            if request.is_ajax():
+                print("Ajax request")
+
             if request.GET.getlist('filtros'):
                 ## implement lazy loading
                 return Activo.objects.parseChoices(request.GET.getlist('filtros'))

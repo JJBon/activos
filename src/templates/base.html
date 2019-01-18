@@ -15,5 +15,43 @@
     {% block content %}{% endblock %}
 
     {% include 'base/js.html' %}
+
+    <!-- first ajax script used for search -->
+
+    <script>
+        $(document).ready(function(){
+            var searchForm = $("#activos-filters-ajax")
+            // print(searchForm)
+            console.log('script working')
+            console.log(searchForm)
+
+            searchForm.submit(function(event){
+                event.preventDefault()
+                console.log("Form is not sending")
+                var thisForm = $(this)
+                var actionEndpoint =  "" //thisForm.attr("action")
+                var httpMethod = thisForm.attr("method")
+                var formData = thisForm.serialize();
+
+                //console.log(thisForm.attr("action"),thisForm.attr("method"))
+                console.log(formData)
+
+                $.ajax({
+                    url: actionEndpoint,
+                    method: httpMethod,
+                    data: formData,
+                    success: function(data){
+                        console.log("success")
+                        console.log(data)
+                    },
+                    error: function(errorData){
+                        console.log("error")
+                        console.log(errorData)
+                    }
+                })
+            })
+        })
+    </script>
+
 </body>
 </html>
