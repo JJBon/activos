@@ -1,0 +1,27 @@
+<div class="card d-block" style="width: auto;">
+    <div class="card-header">
+      {{ instance.getEstado}}
+    </div>
+    {% if instance.image %}
+    <img class="card-img-top img-fluid mx-auto d-block mt-2" style="height:20rem;width: auto" src="{{instance.image.url}}" alt="{{ instance.title }} logo">
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ instance.descripcion }}
+      </h5>
+      {% if instance.placa %}
+        {%if instance.placa != 'nan'%}
+          <h5 class="card-title">
+            PLACA: {{ instance.placa }}
+          </h5>
+        {% endif %}
+      {% endif %}
+      <p class="card-text">{{ instance.observaciones|linebreaks|truncatewords:30 }}</p>
+      <!-- <a href="{{ instance.get_absolute_url }}" class="btn btn-primary">View</a> -->
+      <a href="{% url 'activos:detail' slug=instance.slug %}" class="btn btn-primary">View</a>
+    </div>
+  </div>
+
+
+
+  

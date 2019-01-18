@@ -1,0 +1,44 @@
+{% load static %} 
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
+
+<!-- jquery confirm -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+<!-- eCommerce Custom JS -->
+<script src='{% static "js/menuBar.js" %}'></script>
+
+
+<!-- <script type="text/javascript">
+    $(document).ready(function(){
+        var contentForm = $(".new-content-form")
+        contentForm.submit(function(event){
+            event.preventDefault()
+            console.log(contentForm.serialize())
+            var $this = $(this)
+            var textAreaContent = $(this).find('textarea')
+            console.log(textAreaContent.attr("name"))
+            console.log(textAreaContent.val())
+            
+            var formMethod = $this.attr("method")
+            var formAction = $this.attr("action")
+
+            var data = {
+                "content": textAreaContent,
+                "method" : formMethod,
+                "action" : formAction
+            }
+
+            $('.formDataSubmitted').text(data)
+
+            ENTER AJAXXXXXXX
+        })
+    }) 
+</script> -->
+

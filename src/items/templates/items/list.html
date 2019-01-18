@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="container" >
+        <div class="row mt-2">  
+            <div class="col-2"> 
+                <div class="d-flex flex-column align-items-stretch">
+                    <form>
+                    {{ form }}
+                        <button type="submit" class="btn btn-info mb-2" style="width: 10rem"> Consultar</button>  
+                    </form>      
+                </div>  
+            </div>
+            <div class="col">
+                {% for obj in object_list %}
+                    {% include 'snippets/card.html' with instance=obj %}
+                {% endfor %}
+            </div> 
+          
+    </div>
+
+{% endblock %}

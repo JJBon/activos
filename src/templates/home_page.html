@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <div class="container" >
+    
+            <div class="div2">
+                    {% for obj in object_list %}
+                        {% include 'snippets/card.html' with instance=obj %}
+                    {% endfor %}
+            </div>   
+            <div class="div1">
+                <div class="vertical-menu">
+                    <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Alertas
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'seguimiento' %}">Seguimiento</a>
+                                <a class="dropdown-item" href="{% url 'revision' %}">Revision</a>
+                                <a class="dropdown-item" href="{% url 'fueraDeServicio' %}">Fuera de Servicio</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'home' %}">Todas</a>
+                            </div>
+                    </div>
+                    
+                    <a class="btn btn-primary" href="#" role="button">Logs</a>
+                  </div> 
+                
+            </div>
+    </div>
+
+{% endblock %}
+

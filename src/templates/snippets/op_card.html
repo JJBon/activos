@@ -1,0 +1,65 @@
+<div class="card d-block">
+        <div class="card-header">
+          {{ instance.getMantenimiento}}: {{instance.total}} 
+        </div>
+
+        {% if instance.soportemantenimiento_set.all %}
+             <!-- implementacion de modal -->
+
+             <button type="button" class="btn btn-primary" style="position: absolute; right:0rem;" data-toggle="modal" data-target="#exampleModalLong">
+                Expandir
+              </button>
+    
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Soportes</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h4>xyz</h4> 
+                      {% for soporte in instance.soportemantenimiento_set.all %}
+                        <img src="{{ soporte.image.url }}">
+                      {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          {% with instance.soportemantenimiento_set.all|first as soporte %}
+
+          <img class="card-img-top img-fluid mx-auto d-block mt-2" style="height:20rem;width: auto" src="{{ soporte.image.url }}" alt="{{ instance.title }} logo">
+          
+          {% endwith %}
+        {% endif %}
+        <div class="card-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Proveedor:</td>
+                <td>{{ instance.proveedor }}</td>
+              </tr>
+              <tr>
+                <td>Fecha:</td>
+                <td>{{instance.timestamp}}</td>
+              </tr>
+              <tr>
+                <td>Observaciones</td>
+                <td>{{ instance.observacion|linebreaks|truncatewords:30 }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <h5 class="card-title">Proveedor: {{ instance.proveedor }}</h5>
+          <h5 class="card-title">Fecha: {{instance.timestamp}} </h5> -->
+          <!-- <p class="card-text">{{ instance.observacion|linebreaks|truncatewords:30 }}</p> -->
+          <!-- <a href="{{ instance.get_absolute_url }}" class="btn btn-primary">View</a> -->
+        </div>
+    </div>

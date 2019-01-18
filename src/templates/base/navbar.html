@@ -1,0 +1,36 @@
+{% url 'home' as home_url %}
+{% url 'activos:list' as activo_list_url %}
+{% url 'login' as login_url %}
+
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class='container'>
+        <a class="navbar-brand" href="{{ home_url }}">{% if brand_name %} {{ brand_name }} {% else %}Activos Fijos {% endif %}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% if request.path == home_url %}active{% endif %} ">
+              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item {% if request.path == activo_list_url %}active{% endif %} ">
+              <a class="nav-link" href="{% url 'activos:list' %}">Activos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'reportes:home' %}">Reportes</a>
+            </li>
+            {% if request.user.is_authenticated %}
+            <li class="nav-item {% if request.path == login_url %}active{% endif %} ">
+                <a class="nav-link " href="{% url 'login' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item {% if request.path == login_url %}active{% endif %} ">
+                    <a class="nav-link " href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
+          </ul>
+          {% include 'search/snippets/search-form.html' %}
+        </div>
+        </div>
+      </nav>

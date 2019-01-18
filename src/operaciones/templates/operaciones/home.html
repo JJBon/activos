@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container" >
+        <div class="row mt-2">  
+            <div class="col-2"> 
+                <div class="d-flex flex-column align-items-stretch">
+                    <a class="btn btn-primary" href="{% url 'activos:detail' slug=slug %}" role="button">Propiedades</a>
+                    <a class="btn btn-primary" href="{% url 'activos:operaciones' slug=slug %}" role="button">Hoja De Vida</a>
+                </br>
+                <a class="btn btn-primary" href="{% url 'activos:nuevo' slug=slug %}" role="button">Agregar Operacion</a>
+                
+                </div>  
+            </div>
+            <div class="col">
+                <h1>
+                    <span>Operaciones: {{title}}</span>
+                    {% if placa %}
+                        <span>{{placa}}</span>
+                    {% endif %}
+                </h1>
+                {% for obj in object_list %}
+                    {% include 'snippets/op_card.html' with instance=obj %}
+                {% endfor %}
+            </div> 
+          
+    </div>
+
+{% endblock %}

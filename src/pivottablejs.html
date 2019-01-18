@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PivotTable.js</title>
+
+        <!-- external libs from cdnjs -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/d3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/c3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+
+        <style>
+            body {font-family: Verdana;}
+            .node {
+              border: solid 1px white;
+              font: 10px sans-serif;
+              line-height: 12px;
+              overflow: hidden;
+              position: absolute;
+              text-indent: 2px;
+            }
+            .c3-line, .c3-focused {stroke-width: 3px !important;}
+            .c3-bar {stroke: white !important; stroke-width: 1;}
+            .c3 text { font-size: 12px; color: grey;}
+            .tick line {stroke: white;}
+            .c3-axis path {stroke: grey;}
+            .c3-circle { opacity: 1 !important; }
+            .c3-xgrid-focus {visibility: hidden !important;}
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(function(){
+                if(window.location != window.parent.location)
+                    $("<a>", {target:"_blank", href:""})
+                        .text("[pop out]").prependTo($("body"));
+
+                $("#output").pivotUI(
+                    $.csv.toArrays($("#output").text()),
+                    $.extend({
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.c3_renderers,
+                            $.pivotUtilities.d3_renderers,
+                            $.pivotUtilities.export_renderers
+                            ),
+                        hiddenAttributes: [""]
+                    }, {})
+                ).show();
+             });
+        </script>
+        <div id="output" style="display: none;">,descripcion,marca,modelo,num_cor,num_prev,pdv,placa,totalCost,ubicacion
+0,ESTUFA A GAS INDUSTRIAL CON HORNO 6 PUESTOS,nan,nan,1,0,calle 104,26,571200.000000,produccion
+1,PLANCHA DE MESA  ELÉCTRICA 220V,ROUNDUP,NO VISIBLE,1,0,calle 104,33,307601.000000,ensamble
+2,MESÓN BAÑO MARIA UN ENTREPAÑO,nan,nan,1,0,calle 104,35,154700.000000,ensamble
+3,HORNO CONVECCIÓN,RATIONAL,SCCXS6 2/3 E,1,0,calle 104,38,345100.000000,ensamble
+4,MESÓN DE TRABAJO ACERO INOXIDABLE BAÑO MARIA UN ENTREPAÑO 2 PUERTAS 2 LAVAPLATOS,nan,nan,1,0,calle 104,42,340340.000000,ensamble
+5,LICUADORA INDUSTRIAL,VITAMIX,THE QUIET ONE,1,0,calle 104,45,250000.000000,bar
+6,LICUADORA INDUSTRIAL,VITAMIX,THE QUIET ONE,1,0,calle 104,46,2702599.000000,bar
+7,MAQUINA DE CAFÉ ESPRESSO & CAPPUCCINO,FAEMA,ENOVA,2,0,calle 104,48,933152.000000,bar
+8,MAQUINA MOLEDORA DE CAFÉ,CASADIO,NO VISIBLE,1,0,calle 104,49,313565.000000,bar
+9,MESÓN REFRIGERADOR DE ENSALADAS,TRUE,NO VISIBLE,1,0,calle 104,54,955814.000000,dulce
+10,REFRIGERADOR 2 CAJONES CONSERVACION,TRUE,NO VISIBLE,2,0,calle 104,61,2595540.000000,plancha
+11,REFRIGERADOR DE QUESOS,TRUE,T-23F,2,0,calle 104,176,3952118.000000,bodega
+12,EXPRIMIDOR DE NARANJAS INDUSTRIAL,JOSERRAGO,ESB SUPER-N,1,0,calle 93,320,334414.000000,oficina
+13,REFRIGERADOR INDUSTRIAL,NO VISIBLE,NO VISIBLE,1,1,calle 93,325,1232802.000000,bodega
+14,BANCO CAJÓN MADERA FORRO TIPO CUERO,nan,nan,1,0,calle 93,365,285600.000000,panaderia
+15,MAQUINA LAVAVAJILLA INDUSTRIAL,ELETTROBAR,FAST 160-2DP,2,0,calle 93,422,833000.000000,produccion
+16,CONGELADOR INDUSTRIAL,TURBO AIR,TSF23SD,0,1,calle 93,429,202500.000000,produccion
+17,REFRIGERADOR INDUSTRIAL,TURBO AIR,TSF23SD,0,1,calle 93,430,202500.000000,produccion
+18,LICUADORA INDUSTRIAL,VITAMIX,THE QUIET ONE,1,0,calle 93,434,1615187.000000,bar
+19,LICUADORA INDUSTRIAL,VITAMIX,VITAPREP 3,1,0,calle 104,437,725718.000000,produccion
+20,AMASADORA INDUSTRIAL,SPIRAL MIXER,HS30DA,0,1,calle 93,445,190000.000000,panaderia
+21,BATIDORA INDUSTRIAL,SPAR,800J,1,1,calle 93,446,1057740.000000,panaderia
+22,HORNO PARA PAN,POLIN,NO VISIBLE,1,0,calle 93,451,1500000.000000,panaderia
+23,BAÑO MARIA ACERO INOXIDABLE,RED HOTS,NO VISIBLE,1,0,calle 93,459,143276.000000,ensamble
+24,NEVERA BOTELLERO DE CONSERVACION,TRUE,TBB-24-48G-SD-LD,1,1,calle 93,466,1183729.000000,bar
+25,REFRIGERADOR INDUSTRIAL ENSALADAS,TRUE,TSSU2708,1,1,calle 93,469,830082.000000,dulce
+26,BAÑO MARIA ACERO INOXIDABLE 3 ENTREPAÑOS,KADELL,NO VISIBLE,3,0,calle 93,476,1539384.000000,ensamble
+27,REFRIGERADOR INDUSTRIAL QUESOS,TRUE,TSSU2708,1,0,calle 93,477,321300.000000,ensamble
+28,PLANCHA DE MESA  ELÉCTRICA 220V,ROUNDUP,9300588,1,0,calle 93,478,499800.000000,ensamble
+29,LICUADORA INDUSTRIAL,VITAMIX,DRINK MACHINE ADVANCE,1,0,calle 72,597,226100.000000,produccion
+30,LICUADORA INDUSTRIAL,VITAMIX,DRINK MACHINE ADVANCE,2,0,calle 72,598,1160350.000000,produccion
+31,MAQUINA LAVAVAJILLA INDUSTRIAL,FAGOR,COP174WDD,1,0,calle 72,611,322129.000000,produccion
+32,MESÓN REFIGUERADO CON ESPACIO PARA ENSALADAS 4 GAVETAS,TRUE,TSSU60-16D-4-HC,0,1,calle 72,640,345000.000000,ensamble
+33,MAQUINA DE CAFÉ ESPRESSO & CAPPUCCINO,SANREMO,BRRS,1,0,calle 72,647,224910.000000,bar
+34,LICUADORA INDUSTRIAL,VITAMIX,DRINK MACHINE ADVANCE,3,0,calle 72,651,3234200.000000,bar
+35,punto de venta,nan,nan,1,0,calle 104,INS104,30000.000000,punto
+36,punto de venta,nan,nan,4,0,calle 72,INS72,1100000.000000,punto
+</div>
+    </body>
+</html>

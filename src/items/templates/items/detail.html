@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+<div class="container" >
+        <div class="row mt-2">  
+            <div class="col-2"> 
+                <div class="d-flex flex-column align-items-stretch">
+                    <a class="btn btn-primary" href="{% url 'activos:detail' slug=object.slug %}" role="button">Propiedades</a>
+                    <a class="btn btn-primary" href="{% url 'activos:operaciones' slug=object.slug %}" role="button">Hoja De Vida</a>
+                </div>  
+            </div>
+            <div class="col">
+                <div class="row justify-content-center" >
+                        <h1>{{ object }} </h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                        
+                        {% if object.image %}
+                        <div class="imagenActivo">
+                            <img src="{{object.image.url}}" class="img-fluid" alt="activo imagen">
+                        </div>
+                        {% endif %}
+
+                        </div>
+                        <div class="col-7">
+                            <div class="row ml-4 mt-2" >
+                                Descripcion
+                            </div>
+                            <div class="row ml-4 mt-2">
+                                <table class="table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">Pdv:</th>
+                                            <td><span class="ml-4">{{ object.pdv }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">Placa:</th>
+                                            <td><span class="ml-4">{{ object.placa }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">Estado:</th>
+                                            <td><span class="ml-4">{{ object.getEstado }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">Ubicacion:</th>
+                                            <td><span class="ml-4">{{ object.getUbicacion }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">Marca:</th>
+                                            <td><span class="ml-4">{{ object.marca }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">Modelo:</th>
+                                            <td><span class="ml-4">{{ object.modelo }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">Serie:</th>
+                                            <td><span class="ml-4">{{ object.Serie }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">Propio:</th>
+                                            <td>
+                                                <div class="custom-control custom-checkbox ml-4">
+                                                {% if object.propio %}
+                                                <input type="checkbox" class="custom-control-input" id="defaultCheckedDisabled2" checked disabled>
+                                                {% else %}
+                                                <input type="checkbox" class="custom-control-input" id="defaultUncheckedDisabled2" disabled>
+                                                {% endif %}
+                                                <label class="custom-control-label" for="defaultCheckedDisabled2"></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">Vida Util:</th>
+                                            <td><span class="ml-4">{{ object.vidautil }}</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- espacion para observaciones  -->
+                    <div class="row mt-2">
+                        Observaciones
+                    </div>
+                    <div class="row mt-2">
+                            <textarea class="form-control" id="exampleFormControlTextarea3" rows="7" disabled>{{ object.observaciones }}</textarea>
+                    </div>
+            </div> 
+          
+    </div>
+
+{% endblock %}
+
+
