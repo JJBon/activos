@@ -189,7 +189,7 @@ class ActivoManager(models.Manager):
 
         
     def search(self,query):
-        lookups = Q(descripcion__icontains=query) | Q(pdv__icontains=query) |Q(estado__icontains=query)|   Q(placa__icontains=query) 
+        lookups = Q(descripcion__icontains=query) | Q(pdv__icontains=query) |Q(estado__icontains=query)|   Q(placa__icontains=query) | Q(marca__icontains=query) | Q(modelo__icontains=query)
         return self.filter(lookups).distinct()
 
         
