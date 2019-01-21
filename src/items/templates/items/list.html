@@ -6,17 +6,17 @@
 {% block content %}
 
 
-<div class="container" >
+<div class="container" id="activos_list" >
         <div class="row mt-2">  
             <div class="col-2"> 
                 <div class="d-flex flex-column align-items-stretch">
-                    <form id="activos-filters-ajax" method='GET'>
+                    <form id="activos-filters-ajax" method='GET' action='{% url "activos:update" %}' data-endpoint='{% url "activos:update" %}' >
                     {{ form }}
                         <button type="submit" class="btn btn-info mb-2" style="width: 10rem"> Consultar</button>  
                     </form>      
                 </div>  
             </div>
-            <div class="col">
+            <div class="col" id="activos_col">
                 {% for obj in object_list %}
                     {% include 'snippets/card.html' with instance=obj %}
                 {% endfor %}

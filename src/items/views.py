@@ -1,12 +1,44 @@
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.views.generic import ListView , DetailView
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404,redirect
 
 
 from .models import Activo
 from .forms import ActivoFilterForm
 
 # Create your views here.
+
+
+
+def update_home(request):
+
+    if request.method == 'GET':
+
+        if request.GET.getlist('filtros'):
+            ## implement lazy loading
+            returnAll = False
+            activos = Activo.objects.parseChoices(request.GET.getlist('filtros'))
+        elif not request.GET:
+            print("no variables")
+            returnAll = True
+            activos = Activo.objects.all()
+
+        if request.is_ajax(): # Asynchronous JavaScript and XML
+            print("Ajax request")
+            activos = [ {"nombre":x.descripcion , "placa":x.placa}  for x in activos]
+
+            json_data = {
+                "returnAll":returnAll,
+                "activos":activos
+            }
+            print("should return json")
+            #return activos
+            return JsonResponse(json_data)
+        else:
+            return activos
+
+    #return redirect("activos")
+    return JsonResponse({})
 
 
 class ActivoListView(ListView):
@@ -29,22 +61,10 @@ class ActivoListView(ListView):
 
         print(type(request.GET))
         print(request.GET)
-        
-        if request.method == 'GET':
-            print("Checking request")
-            if request.is_ajax():
-                print("Ajax request")
 
-            if request.GET.getlist('filtros'):
-                ## implement lazy loading
-                return Activo.objects.parseChoices(request.GET.getlist('filtros'))
-
-
-            if not request.GET:
-                print("no variables")
-                return Activo.objects.all()
             
-        return []
+            
+        return Activo.objects.all()
 
 class ActivoDetailSlugView(DetailView):
     #queryset        = Activo.objects.all()

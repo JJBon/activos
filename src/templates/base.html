@@ -29,7 +29,8 @@
                 event.preventDefault()
                 console.log("Form is not sending")
                 var thisForm = $(this)
-                var actionEndpoint =  "" //thisForm.attr("action")
+                //var actionEndpoint =  thisForm.attr("action")
+                var actionEndpoint =  thisForm.attr("data-endpoint")
                 var httpMethod = thisForm.attr("method")
                 var formData = thisForm.serialize();
 
@@ -41,14 +42,48 @@
                     method: httpMethod,
                     data: formData,
                     success: function(data){
+                        var currentPath = window.location.href
+                        var activo_rows = $("#activos_col")
+                        if (data.activos.length > 0){
+                            activo_rows.html("<tr><td colspan=3>Coming Soon</td></tr>")
+                        } else {
+                            activo_rows.html("")
+                        }
+
                         console.log("success")
                         console.log(data)
+                        if (currentPath.indexOf("activos") != -1) {
+                            //updateActivoList(list_html)
+                        }
                     },
                     error: function(errorData){
                         console.log("error")
                         console.log(errorData)
                     }
                 })
+
+                function updateActivoList(list_html){
+                    console.log("in activos list")
+                    list_html.html("<h1>Changed</h1>")
+
+                    // refers to endpoint
+                    var updateActivosUrl = '/api/activos'
+                    var updateActivosMethod = "GET";
+                    var data = {};
+                    $.ajax({
+                        url: updateActivosUrl,
+                        method: updateActivosMethod,
+                        data: data,
+                        sucess: function(data){
+                            console.log("success")
+                        },
+                        error: function(errorData){
+                            console.log("error")
+                            console.log(errorData)
+                        }
+                    })
+
+                }
             })
         })
     </script>
