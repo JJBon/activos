@@ -35,7 +35,7 @@ class EstadoListFilter(admin.SimpleListFilter):
 
 class ActivoAdmin(admin.ModelAdmin):
 
-    search_fields = ('placa','descripcion')
+    search_fields = ('placa','descripcion','modelo','serie')
 
     list_display = ['descripcion','placa','ubicacion','estado']
     #list_display = ['__str__','slug']
