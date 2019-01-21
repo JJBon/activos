@@ -18,7 +18,9 @@
             </div>
             <div class="col" id="activos_col">
                 {% for obj in object_list %}
+                <div class="activo" id=obj.id>
                     {% include 'snippets/card.html' with instance=obj %}
+                </div>
                 {% endfor %}
             </div> 
           

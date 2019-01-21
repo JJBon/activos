@@ -25,7 +25,16 @@ def update_home(request):
 
         if request.is_ajax(): # Asynchronous JavaScript and XML
             print("Ajax request")
-            activos = [ {"nombre":x.descripcion , "placa":x.placa}  for x in activos]
+            activos = [ {
+                "nombre":x.descripcion ,
+                "placa":x.placa, 
+                "estado":x.getEstado(),
+                "observacion":x.observaciones,
+                "url":x.get_absolute_url(),
+                "slug":x.slug,
+                "image": x.getImageUrl()
+                }  
+                for x in activos]
 
             json_data = {
                 "returnAll":returnAll,

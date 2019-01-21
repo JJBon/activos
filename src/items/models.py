@@ -317,6 +317,13 @@ class Activo(models.Model):
     
     def getEstado(self):
         return self.get_estado_display()
+
+    def getImageUrl(self):
+        if self.image and hasattr(self.image, 'url'):
+            print('In image file',self.image.url)
+            return self.image.url
+        
+        return None
      
     def getUbicacion(self):
         return self.get_ubicacion_display()

@@ -43,9 +43,64 @@
                     data: formData,
                     success: function(data){
                         var currentPath = window.location.href
-                        var activo_rows = $("#activos_col")
+                        var list = $("#activos_col")
+                        var activo_rows = $(".activo")
                         if (data.activos.length > 0){
-                            activo_rows.html("<tr><td colspan=3>Coming Soon</td></tr>")
+                            //list.html("")
+                            activo_rows.html("")
+                            activo_html = ""
+                            $.each(data.activos,function(index,value){
+                                // {% if instance.image %}
+                                //     <img class="card-img-top img-fluid mx-auto d-block mt-2" style="height:20rem;width: auto" src="{{instance.image.url}}" alt="{{ instance.title }} logo">
+                                // {% endif %}
+                               
+                                //console.log(value.image)
+                                
+                                activo_html = activo_html +  `
+                                <div class="card d-block" style="width: auto;" id="card_snippet">
+                                    <div class="card-header"> `
+                                    +
+                                    value.estado
+                                    +
+                                    `</div>`
+                                    +
+                                    (typeof value.image !== "undefined" ? `< img class="card-img-top img-fluid mx-auto d-block mt-2" style="height:20rem;width: auto" src="` + value.image + `" alt="` + value.nombre + ` logo"> `:"" )
+                                    +
+                                    `<div class="card-body">
+                                    <h5 class="card-title">`
+                                        +
+                                        value.nombre
+                                        +
+                                    `</h5>
+                                    <p class="card-text">`
+                                        +
+                                        (typeof value.observaciones !== "undefined" ? value.observaciones:"")
+                                        +
+                                    `</p>
+                                    <!-- <a href="`
+                                        +
+                                        value.url
+                                        +
+                                        `" class="btn btn-primary">View</a> -->
+                                    <a href="{% url 'activos:detail' slug=`
+                                    +
+                                    value.slug
+                                    +
+                                    `%}
+                                    
+                                    " class="btn btn-primary">View</a>
+                                    </div>
+                                </div>
+                                `
+                                
+                                //console.log(activo_html)
+                                //list.prepend(activo_html)
+                            
+
+                            })
+                            // console.log(activo_html)
+                            list.html(activo_html)
+                            
                         } else {
                             activo_rows.html("")
                         }
