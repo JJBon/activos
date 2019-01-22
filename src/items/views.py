@@ -71,9 +71,17 @@ class ActivoListView(ListView):
         print(type(request.GET))
         print(request.GET)
 
+        if request.method == 'GET':
+            if request.GET.getlist('filtros'):
+                ## implement lazy loading
+                return Activo.objects.parseChoices(request.GET.getlist('filtros'))
+
+
+            if not request.GET:
+                print("no variables")
+                return Activo.objects.all()
             
-            
-        return Activo.objects.all()
+        return []
 
 class ActivoDetailSlugView(DetailView):
     #queryset        = Activo.objects.all()
