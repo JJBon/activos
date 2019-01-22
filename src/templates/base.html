@@ -20,6 +20,37 @@
 
     <script>
         $(document).ready(function(){
+            // AutoSearch
+
+            var searchBar = $(".search-form")
+            var searchInput = searchBar.find("[name='q']") // input name = 'q'
+            var typingTimer;
+            var typingInterval = 1500
+            var searchBtn = searchBar.find("[type='submit']")
+
+            searchInput.keyup(function(event){
+                clearTimeout(typingTimer)
+                typingTimer = setTimeout(performSearch,typingInterval)
+            })
+
+            searchInput.keydown(function(event){
+                clearTimeout(typingTimer)
+            })
+
+            function displaySearching() {
+                searchBtn.addClass("disabled")
+                searchBtn.html("<i class='fa fa-spin fa-spinner'></i> Searching...")
+            }
+
+            function performSearch() {
+                displaySearching()
+                var query = searchInput.val()
+                setTimeout(function(){
+                    window.location.href = '/search/?q=' + query
+                },1000)
+            }
+
+            // Filtered Search
             var searchForm = $("#activos-filters-ajax")
             // print(searchForm)
             console.log('script working')
@@ -115,6 +146,11 @@
                         }
                     },
                     error: function(errorData){
+                        $.alert({
+                            title:"Error de consulta",
+                            content: "Ha ocurrido un error",
+                            theme:"modern"
+                            })
                         console.log("error")
                         console.log(errorData)
                     }

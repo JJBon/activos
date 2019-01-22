@@ -42,7 +42,7 @@ def update_home(request):
             }
             print("should return json")
             #return activos
-            return JsonResponse(json_data)
+            return JsonResponse(json_data,status=200)
         else:
             return activos
 
