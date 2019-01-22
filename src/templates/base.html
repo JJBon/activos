@@ -55,6 +55,14 @@
                                 // {% endif %}
                                
                                 //console.log(value.image)
+                                //console.log(value.image)
+                                // if (!value.image) {
+                                //     console.log("is null")
+                                // } else {
+                                //     console.log("not null")
+                                // }
+
+
                                 
                                 activo_html = activo_html +  `
                                 <div class="card d-block" style="width: auto;" id="card_snippet">
@@ -64,7 +72,7 @@
                                     +
                                     `</div>`
                                     +
-                                    (typeof value.image !== "undefined" ? `< img class="card-img-top img-fluid mx-auto d-block mt-2" style="height:20rem;width: auto" src="` + value.image + `" alt="` + value.nombre + ` logo"> `:"" )
+                                    (value.image ? `<img class="card-img-top img-fluid mx-auto d-block mt-2" style="height:20rem;width:auto" src="` + value.image + `" alt="` + value.nombre + ` logo"> `:` ` )
                                     +
                                     `<div class="card-body">
                                     <h5 class="card-title">`
@@ -77,18 +85,13 @@
                                         (typeof value.observaciones !== "undefined" ? value.observaciones:"")
                                         +
                                     `</p>
-                                    <!-- <a href="`
-                                        +
-                                        value.url
-                                        +
-                                        `" class="btn btn-primary">View</a> -->
-                                    <a href="{% url 'activos:detail' slug=`
-                                    +
-                                    value.slug
-                                    +
-                                    `%}
-                                    
-                                    " class="btn btn-primary">View</a>
+
+                                     <a href="`
+                                      + 
+                                      `/activos/` + value.slug
+                                      + 
+                                    ` "
+                                     class="btn btn-primary">View</a>
                                     </div>
                                 </div>
                                 `
