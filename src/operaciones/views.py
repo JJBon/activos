@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView , DetailView
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.core.files.storage import FileSystemStorage
 from items.models import Activo
 from operaciones.forms import NewForm , SoporteForm
@@ -62,6 +62,9 @@ def add_operacion(request, *args, **kwargs):
         print('activoId: ',activo_id)
         activos = Activo.objects.filter(pk=activo_id)
         activo = activos[0]
+        form = SoporteForm(request.POST , request.FILES)
+        opForm = NewForm(request.POST)
+        context= {"form": opForm,"img_form":form}
       
 
         print('image should be here: ' , request.FILES)
@@ -72,11 +75,18 @@ def add_operacion(request, *args, **kwargs):
             print('image item', item)
             soporte = SoporteMantenimiento(image=item)
             soportes.append(soporte)
+    
         
-        form = SoporteForm(request.POST , request.FILES)
-        if form.is_valid():
-            print(form)
+        if opForm.is_valid():
+            #print(form.cleaned_data)
             print('form is valid')
+            Operacion.objects.new(user,request.POST,soportes)
+           
+        else:
+            print('invalid form')
+            return render(request,"operaciones/new_op.html",context)
+
+
             #form.save(commit=False)
 
         # fs = FileSystemStorage()
@@ -85,10 +95,10 @@ def add_operacion(request, *args, **kwargs):
         # print(uploaded_file_url)
 
 
-        Operacion.objects.new(user,request.POST,soportes)
+        #Operacion.objects.new(user,request.POST,soportes)
 
         next = request.POST.get('next','/activos/'+activo.slug+'/operaciones')
-        print('redirect:',next)
+        #print('redirect:',next)
 
         ## create operacion 
 

@@ -77,8 +77,10 @@ class OperacionManager(models.Manager):
                 
 
                 print(op)
-        except DatabaseError:
+            return True
+        except:
             print('error')
+            return False
         
         
         
